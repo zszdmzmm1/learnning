@@ -1,6 +1,6 @@
 package day03;
 
-public class variable {
+public class Variable {
     public static void main(String[] args) {
         // int true = 5; true/false/null
         // int 2a =3; 数字开头不允许
