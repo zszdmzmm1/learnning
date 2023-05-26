@@ -1,6 +1,7 @@
 package day03;
 public class JavaDoc {
     /**
+     * 这是中文
      *
      * @param args dddd
      */
