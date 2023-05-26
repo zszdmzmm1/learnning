@@ -1,5 +1,9 @@
 package day03;
 
+/**
+ * 变量命名的规则与规定
+ */
+
 public class Variable {
     public static void main(String[] args) {
         // int true = 5; true/false/null
