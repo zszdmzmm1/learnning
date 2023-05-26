@@ -1,5 +1,9 @@
 package day03;
 
+/**
+ * 解释了声明变量的方法与基本规定
+ */
+
 public class VariableBasic {
     public static void main(String[] args) {
         // 数据类型 变量名 = 值;
@@ -11,6 +15,7 @@ public class VariableBasic {
         //变量的声明
         int size;
         //System.out.println(size);
+
         //赋值
         size = 1001;
         System.out.println(size);
