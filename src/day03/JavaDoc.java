@@ -1,13 +1,14 @@
 package day03;
+
+/**
+ * 注释的使用
+ * 1.文档注释
+ */
 public class JavaDoc {
-    /**
-     * 这是中文
-     *
-     * @param args dddd
-     */
     public static void main(String[] args) {
-        //  kk
-        /*fjas
+        //2.单行注释
+        /*
+        3.多行注释
         */
         System.out.println("!!!!!");
     }
