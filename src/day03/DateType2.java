@@ -15,7 +15,9 @@ public class DateType2 {
         //byte,char,short -> int -> long -> float -> double
         //byte,char, short互相运算，转化为int
         int in3 = by1 + sh1 + ch1;
+        int in4 = in1 + in2;
         //char ch2 = sh1 +sh2;
+        //short sh3 = by1 + ch1;
         float fl2 = in1 + in2;
         double do2 = fl1 + in1;
         //int in4 = fl1  + do1;
