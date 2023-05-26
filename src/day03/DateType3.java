@@ -5,8 +5,11 @@ public class DateType3 {
         double dou1 = 19.9;
         int int1 = (int)dou1;
 
+        //损耗
         long long1 = 129;
+        //无损
         short sh1 = (short) long1;
+        //溢出
         byte by1 = (byte) long1;
 
 
