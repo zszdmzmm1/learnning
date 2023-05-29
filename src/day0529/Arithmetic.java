@@ -19,5 +19,27 @@ public class Arithmetic {
         System.out.println(result4);
         System.out.println(result5);
 
+
+        // ---- ---- ----
+
+        int c1 = 12;
+        int c2 = -12;
+        int d1 = 5;
+        int d2 = -5;
+
+
+        //以下例子表明，取余的正负只与被除数有关。
+        int r1 = c1 % d1;
+        System.out.println("r1 = " + r1);
+
+        int r2 = c2 % d1;
+        System.out.println("r2 = " + r2);
+
+        int r3 = c1 % d1;
+        System.out.println("r3 = " + r3);
+
+        int r4 = c2 % d2;
+        System.out.println("r4 = " + r4);
+
     }
 }
