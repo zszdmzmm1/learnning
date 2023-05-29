@@ -1,4 +1,4 @@
-package day03;
+package day0526;
 
 /**
  * 简单介绍基本数据类型

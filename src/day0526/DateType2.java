@@ -1,4 +1,4 @@
-package day03;
+package day0526;
 
 /**
  * 不同的数据类型相互计算

@@ -1,4 +1,4 @@
-package day03;
+package day0526;
 
 /**
  * 解释了声明变量的方法与基本规定

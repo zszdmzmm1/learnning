@@ -1,4 +1,4 @@
-package day03;
+package day0526;
 
 /**
  * 变量命名的规则与规定

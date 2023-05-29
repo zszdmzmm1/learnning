@@ -1,4 +1,4 @@
-package day03;
+package day0526;
 /**
  *  - 二进制 binary, 0b/0B 0-1
  *  - 十进制 decimal， 0-9

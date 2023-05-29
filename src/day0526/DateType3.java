@@ -1,4 +1,4 @@
-package day03;
+package day0526;
 
 /**
  * 数据类型的强制转换与转换损耗
