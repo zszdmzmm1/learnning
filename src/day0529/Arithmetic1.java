@@ -17,9 +17,9 @@ public class Arithmetic1 {
         System.out.print("i = " + i ); //28
         System.out.println("i2 = " + i2); //27
 
-        i = i2++;
-        System.out.print("i = " + i ); //27
-        System.out.println("i2 = " + i2); //28
+        i = --i2;
+        System.out.print("i = " + i ); //26
+        System.out.println("i2 = " + i2); //26
     }
 }
 
