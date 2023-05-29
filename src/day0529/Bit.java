@@ -1,4 +1,8 @@
 package day0529;
+
+/**
+ * 位运算
+ */
 public class Bit {
     public static void main(String[] args) {
         byte num = 1;

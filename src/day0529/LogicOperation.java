@@ -1,6 +1,10 @@
 package day0529;
 
-public class Text {
+/**
+ * 逻辑运算
+ */
+
+public class LogicOperation {
     public static void main(String[] args) {
         System.out.println("a" + "\t" + "\t" + "b" + "\t" + "\t" + "a&b" + "\t" + "\t" + "a&&b" + "\t" + "a|b" + "\t" + "\t" + "a||b" + "\t" + "!a" + "\t" + "\t" + "a^b");
         System.out.println("--------------------------------------------------------------");

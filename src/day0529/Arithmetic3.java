@@ -1,10 +1,17 @@
 package day0529;
 
-public class Assignment {
+/**
+ * +=, -=, /=, *=
+ */
+
+public class Arithmetic3 {
     public static void main(String[] args) {
+        //与++ --相同，这些运算可以保留原本的数据类型
+
         //1.
         short s = 3;
         s += 2;
+        System.out.println("s = " + s);
 
         //2.
         int i = 1;

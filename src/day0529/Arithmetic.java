@@ -1,23 +1,42 @@
 package day0529;
 
+/**
+ * 除法与取余的用法与细节
+ */
+
 public class Arithmetic {
     public static void main(String[] args) {
         int a = 12;
         int b = 5;
 
+        //右侧以int计算，损耗后装进int变量里
         int result0 = a / b;
-        double result1 = a / b;
-        double result2 = (double) a / b;
-        double result3 = (double) (a / b);
-        double result4 = a / b + 0.0;
-        double result5 = a * 1.0 / b;
+        System.out.println("result0 = " + result0);
 
-        System.out.println(result0);
-        System.out.println(result1);
-        System.out.println(result2);
-        System.out.println(result3);
-        System.out.println(result4);
-        System.out.println(result5);
+
+        //右侧以int计算，损耗后装进double变量里
+        double result1 = a / b;
+        System.out.println("result1 = " + result1);
+
+
+        //右侧强制转换成double计算，装进double变量里
+        double result2 = (double) a / b;
+        System.out.println("result2 = " + result2);
+
+
+        //右侧以int计算，强制转换成double后装进double变量里
+        double result3 = (double) (a / b);
+        System.out.println("result3 = " + result3);
+
+
+        //右侧以int计算，损耗后再与double计算，装进double变量里
+        double result4 = a / b + 0.0;
+        System.out.println("result4 = " + result4);
+
+
+        //转换为double计算，装进double变量里
+        double result5 = a * 1.0 / b;
+        System.out.println("result5 = " + result5);
 
 
         // ---- ---- ----

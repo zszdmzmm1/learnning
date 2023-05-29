@@ -2,6 +2,10 @@ package day0529;
 
 import java.util.Scanner;
 
+/**
+ *一个简单取余应用的例子
+ */
+
 public class Arithmetic2 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
