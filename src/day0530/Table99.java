@@ -1,5 +1,9 @@
 package day0530;
 
+/**
+ * 九九乘法表
+ */
+
 public class Table99 {
     public static void main(String[] args) {
         for (int i = 1, j = 1; i < 10; i++) {
