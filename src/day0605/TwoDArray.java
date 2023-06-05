@@ -1,6 +1,9 @@
 package day0605;
+/*
+* 2D数组的遍历
+ */
 
-public class Temp {
+public class TwoDArray {
     public static void main(String[] args) {
         int[][] arr = new int[][]{{3, 5, 8}, {12, 9}, {7, 0, 6, 4}};
         for (int i = 0; i < arr.length; i++) {
