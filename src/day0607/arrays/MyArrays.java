@@ -3,14 +3,13 @@ package day0607.arrays;
 public class MyArrays {
 
     /**
-     *
      * @param arr int类型的数组
      * @return 数组的最大值
      */
     public static int max(int[] arr) {
         int max = arr[0];
         for (int i = 0; i < arr.length; i++) {
-            if(arr[i] > max){
+            if (arr[i] > max) {
                 max = arr[i];
             }
         }
@@ -19,7 +18,6 @@ public class MyArrays {
 
 
     /**
-     *
      * @param arr int类型的数组
      * @return 数组的最小值
      */
@@ -35,7 +33,6 @@ public class MyArrays {
 
 
     /**
-     *
      * @param arr int类型的数组
      * @return 数组元素总和
      */
@@ -43,7 +40,7 @@ public class MyArrays {
         int sum = 0;
         for (int i = 0; i < arr.length; i++) {
 
-                sum += arr[i];
+            sum += arr[i];
 
         }
         return sum;
@@ -52,6 +49,7 @@ public class MyArrays {
 
     /**
      * 遍历整个数组打印，数组元素间用空格隔开
+     *
      * @param arr int类型的数组
      */
     public static void printAll(int[] arr) {
@@ -64,7 +62,6 @@ public class MyArrays {
 
 
     /**
-     *
      * @param arr int类型的数组
      * @return 数据类型为double， 值为数据元素的平均值
      */
@@ -81,7 +78,8 @@ public class MyArrays {
 
     /**
      * 在数组arr[]中寻找target，找到输出"found it!",
-     * @param arr int类型的数组
+     *
+     * @param arr    int类型的数组
      * @param target int类型的目标，在arr[]中寻找这个数
      */
     public static void search(int[] arr, int target) {
@@ -112,6 +110,7 @@ public class MyArrays {
 
     /**
      * 将数组元素从小到大排序
+     *
      * @param arrs int类型的数组
      */
     public static void sort(int[] arrs) {
@@ -133,6 +132,21 @@ public class MyArrays {
         }
         for (int arr : arrs) {
             System.out.print(arr + " ");
+        }
+    }
+
+
+    /**
+     * 将数组元素顺序反转
+     *
+     * @param arr int类型的数组
+     */
+    public static void transvers(int[] arr) {
+        int temp = 0;
+        for (int i = 0; i < arr.length / 2; i++) {
+            temp = arr[i];
+            arr[i] = arr[arr.length - i - 1];
+            arr[arr.length - i - 1] = temp;
         }
     }
 }
