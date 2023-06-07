@@ -149,4 +149,23 @@ public class MyArrays {
             arr[arr.length - i - 1] = temp;
         }
     }
+
+
+    /**
+     * 将数组arr1与arr2的元素交换
+     * @param arr1 int类型数组
+     * @param arr2 int类型数组
+     */
+    public static void arrSwitch(int[] arr1, int[] arr2) {
+        if (arr1.length != arr2.length) {
+            System.out.println("数组长度不同，无法交换！");
+        }
+        for (int i = 0; i < arr1.length; i++) {
+            arr1[i] += arr2[i];
+            arr2[i] = arr1[i] - arr2[i];
+            arr1[i] -= arr2[i];
+        }
+    }
+
+
 }
