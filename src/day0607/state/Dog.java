@@ -6,7 +6,7 @@ public class Dog {
     String color;
 
     public void showDog(){
-        System.out.print("[" + ID + "、" + name + "、" +  color + "]  ");
+        System.out.print("[" + ID + "、" + name + "、" +  color + "] ");
     }
 
 }

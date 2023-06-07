@@ -38,9 +38,7 @@ public class StudentTest {
 
         //System.out.println("学生(" + st1.ID + "学号)的信息：学号=" + st1.ID + "、姓名=" + st1.name + "、年龄=" + st1.age);
         st1.infoShow();
-        st1.printDog();
         st2.infoShow();
-        st2.printDog();
 
     }
 }
