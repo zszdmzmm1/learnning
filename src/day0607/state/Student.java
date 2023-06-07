@@ -1,9 +1,5 @@
 package day0607.state;
 
-import day0605.Array;
-
-import java.util.Arrays;
-
 public class Student {
     int ID;
     String name;
