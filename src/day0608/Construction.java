@@ -19,6 +19,8 @@ public class Construction {
         System.out.println(s3);
         System.out.println(Student.students[2]);
         System.out.println(s4);
+        s3.age = 19;
+        System.out.println(Student.students[2].age);
     }
 }
 
