@@ -12,6 +12,7 @@ public class Construction {
         Student s2 = Student.getInstances();
         Student s3 = Student.getInstances();
         Student s4 = Student.getInstances();
+        s4.age = 3;
         System.out.println(s1);
         System.out.println(Student.students[0]);
         System.out.println(s2);
