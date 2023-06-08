@@ -29,7 +29,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "{" +
                 "number=" + number +
                 ", state=" + state +
                 ", score=" + score +
