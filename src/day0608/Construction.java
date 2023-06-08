@@ -26,7 +26,7 @@ class Student{
     String name;
     int age;
     static Student student;
-    static Student[] students;
+    //static Student[] students;
 
     private Student(){
 
