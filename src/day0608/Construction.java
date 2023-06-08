@@ -6,7 +6,9 @@ public class Construction {
         Student student2 = Student.getInstance();
         System.out.println(student1);
         System.out.println(student2);
-/*        Student s1 = Student.getInstances();
+
+        System.out.println("----------------");
+        Student s1 = Student.getInstances();
         Student s2 = Student.getInstances();
         Student s3 = Student.getInstances();
         Student s4 = Student.getInstances();
@@ -16,27 +18,39 @@ public class Construction {
         System.out.println(Student.students[1]);
         System.out.println(s3);
         System.out.println(Student.students[2]);
-        System.out.println(s4);*/
+        System.out.println(s4);
     }
 }
 
 
-class Student{
+class Student {
     String id;
     String name;
     int age;
     static Student student;
-    //static Student[] students;
+    static Student[] students = new Student[3];
 
-    private Student(){
+    private Student() {
 
     }
 
-    public static Student getInstance(){
-        if(student == null){
-           student = new Student();
-       }
-       return student;
+    public static Student getInstance() {
+        if (student == null) {
+            student = new Student();
+        }
+        return student;
+    }
+
+    public static Student getInstances() {
+        Student s = new Student();
+        for (int i = 0; i < students.length; i++) {
+            if (students[i] == null) {
+                students[i] = new Student();
+                s = students[i];
+                break;
+            }
+        }
+        return s;
     }
 
 
