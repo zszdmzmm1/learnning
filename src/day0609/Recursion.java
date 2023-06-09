@@ -1,7 +1,5 @@
 package day0609;
 
-import day0608.printstar.Method;
-
 public class Recursion {
     public static void main(String[] args) {
         SumMethod method = new SumMethod();
