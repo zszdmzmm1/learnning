@@ -27,8 +27,10 @@ public class Customer {
 
 
     public String showAccount() {
-        return "Customer [" + firstName + lastName + "] 有一个账户：id = " + account.getId()
-                + ", annualInterestRate=" + (account.getAnnualInterestRate() * 100.0)
+        return "Customer [" + firstName + lastName
+                + "] 有一个账户：id = " + account.getId()
+                + ", annualInterestRate="
+                + (account.getAnnualInterestRate() * 100.0)
                 + "%, banlance=" + account.getBanlance();
     }
 }
