@@ -37,6 +37,7 @@ class Student {
 
     }
 
+    //限定只能new一个新的Studnet
     public static Student getInstance() {
         if (student == null) {
             student = new Student();
@@ -44,6 +45,8 @@ class Student {
         return student;
     }
 
+
+    //限定只能new3个新的Studnet
     public static Student getInstances() {
         Student s = new Student();
         for (int i = 0; i < students.length; i++) {
