@@ -35,7 +35,7 @@ public class Account {
     }
 
     public void withdraw(double money) {
-        if (money >= banlance) {
+        if (money > banlance) {
             System.out.println("余额不足，取款失败！");
         } else if (money < 0){
             System.out.println("输入值错误！");
