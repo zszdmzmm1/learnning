@@ -10,7 +10,7 @@ public class Player {
         pick = choice;
     }
 
-    public static  void match(){
+    public static void match(){
         if(Objects.equals(pick, ComputerChoice.pick)){
             System.out.println("draw");
         }else if((pick.equals("rock") && ComputerChoice.pick.equals("scissors"))
