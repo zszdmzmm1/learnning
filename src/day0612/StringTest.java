@@ -7,9 +7,9 @@ public class StringTest {
         System.out.println(upCase);
         System.out.println(upCase.substring(1, 3));*/
 
-        String target = "gahsdgjahiuhiwhgaishdivahzzz";
+        String target = "gahHGHJGSJHGHSKHDAGCUGSIIFKFAJFIHFsdgjahiuhiwhgaishdivahzzz";
         char[] ch = target.toCharArray();
-        for (int i = 97; i < 123; i++) {
+        for (int i = 65; i < 123; i++) {
             int num = 0;
             for (int j = 0; j < ch.length; j++) {
                 if (ch[j] == (char) i) {
