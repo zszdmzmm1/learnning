@@ -1,8 +1,6 @@
 package day0613;
 
 
-import com.sun.source.tree.ContinueTree;
-
 import java.util.*;
 
 
@@ -43,10 +41,7 @@ public class MyList {
         Set<Map.Entry<Character, Integer>> charSet = map.entrySet();
         System.out.println(charSet);
 
-        Iterator iterator = charSet.iterator();
-
-        while (iterator.hasNext()) {
-            Map.Entry<Character, Integer> h = (Map.Entry<Character, Integer>) iterator.next();
+        for (Map.Entry<Character, Integer> h : charSet) {
             System.out.println(h.getKey() + ":" + h.getValue());
         }
     }
