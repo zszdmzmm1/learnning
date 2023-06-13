@@ -8,6 +8,7 @@ import java.util.*;
 
 public class MyList {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         List<Character> letterList = new ArrayList<>();
         letterList.add('a');
         letterList.add('r');
@@ -26,6 +27,7 @@ public class MyList {
         letterList.add('n');
         letterList.add('s');
         letterList.add('t');
+        System.out.println(letterList);
 
 
         Map<Character, Integer> map = new HashMap<>();
@@ -38,8 +40,14 @@ public class MyList {
             num++;
             map.put(character, num);
         }
-        Set<Map.Entry<Character,Integer>> charSet = map.entrySet();
+        Set<Map.Entry<Character, Integer>> charSet = map.entrySet();
         System.out.println(charSet);
 
+        Iterator iterator = charSet.iterator();
+
+        while (iterator.hasNext()) {
+            Map.Entry<Character, Integer> h = (Map.Entry<Character, Integer>) iterator.next();
+            System.out.println(h.getKey() + ":" + h.getValue());
+        }
     }
 }
