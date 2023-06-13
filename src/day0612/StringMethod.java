@@ -15,7 +15,6 @@ public class StringMethod {
         System.out.println("s = " + s);*/
 
 
-
         String forTest = new String("There is a girl in my sight.");
 
         /*将String修改为char数组。*/
@@ -60,8 +59,8 @@ public class StringMethod {
 
 
         /*插入，背不下来，有用再查*/
-        char[] ch = {'s','f'};
-        forTest.getChars(2,3,ch,0);
+        char[] ch = {'s', 'f'};
+        forTest.getChars(2, 3, ch, 0);
         System.out.println(ch[0]);
 
         /*返回第一次出现的索引，无则返回-1，同理还有lastIndexOf*/
@@ -73,6 +72,38 @@ public class StringMethod {
         /*不解释*/
         forTest.length();
         System.out.println(forTest.repeat(3));
+
+        /*替换*/
+        System.out.println(forTest.replaceFirst("is", "are"));
+        System.out.println(forTest.replaceAll("e", "a"));
+
+
+        /*根据参数分割字符串*/
+        String[] splitResults = forTest.split(" ");
+        for (String splitResult : splitResults) {
+            System.out.println(splitResult);
+        }
+
+
+        /*消除首尾全角与半角空格*/
+        String temp = "   f d f    ";
+        System.out.print(temp.strip());
+        System.out.println("nn");
+
+
+        /*将转义字符实现出来*/
+        String temp1 = "\ndf\t";
+        System.out.println(temp1.translateEscapes());
+
+
+        /*消除半角空格*/
+        System.out.print(temp.trim());
+        System.out.println("nn");
+
+
+        /*截取任意段*/
+        System.out.println(forTest.substring(4, 9));
+
 
     }
 
