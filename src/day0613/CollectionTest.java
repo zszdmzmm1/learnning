@@ -86,7 +86,7 @@ public class CollectionTest {
         System.out.println();
         System.out.println("-----集合 -> 数组----------");
         Object[] arr = coll.toArray();
-        System.out.println(arr.toString());
+        System.out.println(arr[1]);
 
 
         System.out.println();
