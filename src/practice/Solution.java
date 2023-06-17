@@ -1,6 +1,8 @@
 package practice;
 
 
+import java.util.*;
+
 public class Solution {
     /**
      * 给定一个整数数组 nums 和一个整数目标值 target，
@@ -96,16 +98,70 @@ public class Solution {
         int left = 0, right = nums.length - 1;
 
         /*相较于普通的二分法，需要额外处理无对应数据的情况*/
-        while(left <= right){
+        while (left <= right) {
             int mid = left + (right - left) / 2;
-            if(nums[mid] == target){
+            if (nums[mid] == target) {
                 return mid;
-            }else if(nums[mid] < target){
+            } else if (nums[mid] < target) {
                 left = mid + 1;
-            }else if(nums[mid] > target){
+            } else if (nums[mid] > target) {
                 right = mid - 1;
             }
         }
         return left;
+    }
+
+
+    /**
+     * 以数组 intervals 表示若干个区间的集合，
+     * 其中单个区间为 intervals[i] = [starti, endi] 。
+     * 请你合并所有重叠的区间，并返回一个不重叠的区间数组，
+     * 该数组需恰好覆盖输入中的所有区间。
+     */
+    public static int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+        Map<Integer, int[]> map = new LinkedHashMap<>();
+        int[][] result;
+        int mapKey = 0;//用于判断是增加还是更新数组
+        int left = intervals[0][0], right = intervals[0][1];
+        map.put(mapKey, intervals[0]);
+        for (int i = 1; i < intervals.length; i++) {
+            if(intervals[i][0] > right){
+                mapKey++;
+                left = intervals[i][0];
+                right = intervals[i][1];
+            } else {
+                left = Math.min(left, intervals[i][0]);
+                right = Math.max(right, intervals[i][1]);
+            }
+            map.put(mapKey, new int[]{left, right});
+        }
+        //result = map.values().toArray(new int[map.size()][2]);
+        Iterator<int[]> iterator = map.values().iterator();
+        result = new int[map.size()][2];
+        for (int j = 0; j < map.size(); j++) {
+            result[j] = iterator.next();
+        }
+        return result;
+    }
+
+
+    public static int[][] mergeFaster(int[][] intervals) {
+        if (intervals.length == 0) return intervals;
+        //1、对二维数组按照第一列升序排序
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+        //2、进行合并数组
+        List<int[]> list = new ArrayList<>();
+        int term[] = intervals[0];//临时空间，1 判断是否需要合并集合，2 是否放入结果集
+        for (int i = 1; i < intervals.length; i++) {
+            if (term[1] >= intervals[i][0]) {
+                term[1] = Math.max(term[1], intervals[i][1]);
+            } else {
+                list.add(term);
+                term = intervals[i];
+            }
+        }
+        list.add(term);
+        return list.toArray(new int[list.size()][2]);
     }
 }

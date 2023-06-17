@@ -2,7 +2,7 @@ package practice;
 
 public class SolutionTest {
     public static void main(String[] args) {
-        int result = Solution.searchInsertImprove(new int[]{1, 3, 5, 9}, 2);
-        System.out.println(result);
+        int[][] test = {{1,2},{3,4},{0,5}};
+        int[][] result = Solution.merge(test);
     }
 }
