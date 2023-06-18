@@ -12,6 +12,7 @@ import java.util.Set;
 public class SetTest2 {
     public static void main(String[] args) {
         Set set = new HashSet();
+        //Student重写了HashCode的equals()方法和hashCode()方法
         Student s1 = new Student("黄", 21);
         Student s2 = new Student("林", 23);
         Student s3 = new Student("朱", 20);
