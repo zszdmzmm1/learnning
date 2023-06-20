@@ -6,6 +6,9 @@ import java.util.zip.CheckedInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+/**
+ * 解压缩，只能解两级压缩的.zip格式文件。
+ */
 public class FileUnCompress {
     public static void main(String[] args) throws IOException {
         extractZip("C:\\Users\\86173\\Desktop\\答案.zip");

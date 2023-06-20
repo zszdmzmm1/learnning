@@ -12,7 +12,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /**
- * 压缩两级文件，zip格式。
+ * 压缩两级文件，zip格式。加入递归可以压缩多级文件
  */
 
 public class FileCompress {
