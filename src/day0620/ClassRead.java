@@ -2,7 +2,6 @@ package day0620;
 
 
 import com.google.gson.Gson;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
