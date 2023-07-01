@@ -1,6 +1,6 @@
 package day0609;
 
-public class Recursion {
+public class RecursionTest {
     public static void main(String[] args) {
         SumMethod method = new SumMethod();
         System.out.println(method.method(100));
