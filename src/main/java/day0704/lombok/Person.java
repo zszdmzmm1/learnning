@@ -9,13 +9,18 @@ public class Person {
     private String name;
     private int age;
     private String id;
-    private static Person person = new Person();
+    private static Person person;
+
 
 
     private Person() {
+
     }
 
     public static Person getPerson(){
+        if(person == null){
+            person = new Person();
+        }
         return person;
     }
 /*
