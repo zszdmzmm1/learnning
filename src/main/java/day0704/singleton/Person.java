@@ -6,9 +6,6 @@ package day0704.singleton;
 @AllArgsConstructor*/
 
 public class Person {
-    private String name;
-    private int age;
-    private String id;
     private static volatile Person person;
 
 
@@ -20,41 +17,15 @@ public class Person {
         if (person == null) {
             synchronized ("a") {
                 if (person == null) {
-                    try {
+/*                    try {
                         Thread.sleep(1);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
-                    }
+                    }*/
                     person = new Person();
                 }
             }
         }
         return person;
     }
-
-
-/*
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }*/
 }
