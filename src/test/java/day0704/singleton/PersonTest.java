@@ -22,7 +22,7 @@ class PersonTest {
 
     @Test
     void test2(){
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             new Thread(() -> {
                 System.out.println(Person.getPerson().hashCode());
             }).start();

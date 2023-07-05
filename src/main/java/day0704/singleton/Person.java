@@ -5,8 +5,6 @@ package day0704.singleton;
 @Setter
 @AllArgsConstructor*/
 
-import static java.lang.Thread.sleep;
-
 public class Person {
     private String name;
     private int age;
@@ -14,24 +12,27 @@ public class Person {
     private static Person person;
 
 
-
     private Person() {
 
     }
 
-    public static Person getPerson(){
-        if(person == null) {
-/*            try {
-                Thread.sleep(1);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }*/
-            synchronized (Person.class){
-                person = new Person();
+    public static Person getPerson() {
+        if (person == null) {
+            synchronized ("a") {
+                if (person == null) {
+                    try {
+                        Thread.sleep(1);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    person = new Person();
+                }
             }
         }
         return person;
     }
+
+
 /*
     public String getName() {
         return name;
