@@ -1,4 +1,4 @@
-package day0704.lombok;
+package day0704.singleton;
 
 
 /*@Getter
