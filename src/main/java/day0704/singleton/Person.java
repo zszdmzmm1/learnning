@@ -9,7 +9,7 @@ public class Person {
     private String name;
     private int age;
     private String id;
-    private static Person person;
+    private static volatile Person person;
 
 
     private Person() {
