@@ -6,26 +6,23 @@ package day0704.singleton;
 @AllArgsConstructor*/
 
 public class Person {
-    private static volatile Person person;
 
 
     private Person() {
 
     }
 
+    private static final class PersonHolder {
+        private static final Person person = new Person();
+    }
+
+
     public static Person getPerson() {
-        if (person == null) {
-            synchronized ("a") {
-                if (person == null) {
-/*                    try {
+         /*                    try {
                         Thread.sleep(1);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }*/
-                    person = new Person();
-                }
-            }
-        }
-        return person;
+        return PersonHolder.person;
     }
 }
