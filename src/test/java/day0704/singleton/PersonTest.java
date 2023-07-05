@@ -1,8 +1,11 @@
 package day0704.singleton;
 
-public class PersonTest {
-    public static void main(String[] args) {
+import org.junit.jupiter.api.Test;
 
+
+class PersonTest {
+    @Test
+    void test1() {
         Person person1 = Person.getPerson();
         Person person2 = Person.getPerson();
         Person person3 = Person.getPerson();
@@ -14,8 +17,16 @@ public class PersonTest {
         System.out.println(person3 == person2);
         System.out.println(person3 == person4);
         System.out.println(person5 == person4);
-
-
-
     }
+
+
+    @Test
+    void test2(){
+        for (int i = 0; i < 10; i++) {
+            new Thread(() -> {
+                System.out.println(Person.getPerson().hashCode());
+            }).start();
+        }
+    }
+
 }

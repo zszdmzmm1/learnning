@@ -5,6 +5,8 @@ package day0704.singleton;
 @Setter
 @AllArgsConstructor*/
 
+import static java.lang.Thread.sleep;
+
 public class Person {
     private String name;
     private int age;
@@ -17,8 +19,8 @@ public class Person {
 
     }
 
-    public static Person getPerson(){
-        if(person == null){
+    public static synchronized Person getPerson(){
+        if(person == null) {
             person = new Person();
         }
         return person;
