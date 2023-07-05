@@ -19,9 +19,16 @@ public class Person {
 
     }
 
-    public static synchronized Person getPerson(){
+    public static Person getPerson(){
         if(person == null) {
-            person = new Person();
+/*            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }*/
+            synchronized (Person.class){
+                person = new Person();
+            }
         }
         return person;
     }
