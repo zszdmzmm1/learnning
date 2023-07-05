@@ -18,11 +18,6 @@ public class Person {
 
 
     public static Person getPerson() {
-         /*                    try {
-                        Thread.sleep(1);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }*/
         return PersonHolder.person;
     }
 }
