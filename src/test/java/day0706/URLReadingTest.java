@@ -1,5 +1,9 @@
 package day0706;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -82,6 +86,7 @@ public class URLReadingTest {
         URL url = new URL("http://www.baidu.com/img/bd_logo1.png");
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
+
         InputStream is = urlConnection.getInputStream();
         File file = new File("src/test/java/day0706/dest.jpg");
         FileOutputStream fos = new FileOutputStream(file);
@@ -92,5 +97,29 @@ public class URLReadingTest {
             fos.write(buffer, 0, len);
         }
         System.out.println("图片下载完成！");
+    }
+
+    @Test
+    void test() throws IOException {
+        Document doc = Jsoup.connect("http://www.qq.com/").get();
+        System.out.println(doc.title());
+    }
+
+
+    @Test
+    void test1() throws IOException {
+        Document doc = Jsoup.connect("http://www.baidu.com/").get();
+        Elements element = doc.select("a#s-top-loginbtn");
+        System.out.println(element.outerHtml());
+    }
+
+    @Test
+    void test2() throws IOException {
+        Document doc = Jsoup.connect("https://so.gushiwen.cn/gushi/shijing.aspx").get();
+        Elements element1 = doc.select("span > a[target =_blank], span > a[style =color:#999999;]");
+        Elements element2 = doc.select("div.left span:has(a)");
+        Elements element3 = doc.select("div.left div.sons a");
+        System.out.println(element1.size());
+        System.out.println(element2.eachText());
     }
 }
