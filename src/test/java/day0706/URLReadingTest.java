@@ -4,14 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-import java.net.URLConnection;
+import java.io.*;
+import java.net.*;
 import java.nio.charset.StandardCharsets;
 
 public class URLReadingTest {
@@ -80,5 +74,23 @@ public class URLReadingTest {
             System.out.println(inputLine);
         }
         in.close();
+    }
+
+
+    @Test
+    void GetImageExample() throws IOException {
+        URL url = new URL("http://www.baidu.com/img/bd_logo1.png");
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+        InputStream is = urlConnection.getInputStream();
+        File file = new File("src/test/java/day0706/dest.jpg");
+        FileOutputStream fos = new FileOutputStream(file);
+
+        byte[] buffer = new byte[1024];
+        int len;
+        while ((len = is.read(buffer)) != -1){
+            fos.write(buffer, 0, len);
+        }
+        System.out.println("图片下载完成！");
     }
 }
