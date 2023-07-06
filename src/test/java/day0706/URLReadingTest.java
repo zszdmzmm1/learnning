@@ -66,4 +66,19 @@ public class URLReadingTest {
         }
         in.close();
     }
+
+    @Test
+    void readingDirectlyFromAURL3() throws IOException {
+        URL url = new URL("https://www.douban.com/");
+        URLConnection uc = url.openConnection();
+        uc.setConnectTimeout(1000);
+        uc.setReadTimeout(2000);
+        uc.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36");
+        BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
+        String inputLine;
+        while((inputLine = in.readLine()) != null){
+            System.out.println(inputLine);
+        }
+        in.close();
+    }
 }
