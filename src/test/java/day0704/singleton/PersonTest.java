@@ -1,6 +1,8 @@
 package day0704.singleton;
 
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
 
 
 class PersonTest {
