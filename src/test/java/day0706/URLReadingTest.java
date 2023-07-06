@@ -12,6 +12,7 @@ import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 
 public class URLReadingTest {
     @Test
@@ -49,5 +50,20 @@ public class URLReadingTest {
             }
             in.close();
         });
+    }
+
+    @Test
+    void readingDirectlyFromAURL2() throws IOException {
+        URL url = new URL("https://www.qq.com/");
+
+        URLConnection uc = url.openConnection();
+        uc.setConnectTimeout(1000);
+        uc.setReadTimeout(2000);
+        BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream(), "gb2312"));
+        String inputLine;
+        while((inputLine = in.readLine()) != null){
+            System.out.println(inputLine);
+        }
+        in.close();
     }
 }
