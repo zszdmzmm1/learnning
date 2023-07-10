@@ -73,7 +73,9 @@ public class Fetching {
             }
         }
         //发送消息
-        ElementsDealing elementsDealing = new ElementsDealing("*****", "*******", "********");
-        elementsDealing.sentMessage(itemList);
+        if (itemList.size() != 0) {
+            ElementsDealing elementsDealing = new ElementsDealing("*****", "*******", "********");
+            elementsDealing.sentMessage(itemList);
+        }
     }
 }
