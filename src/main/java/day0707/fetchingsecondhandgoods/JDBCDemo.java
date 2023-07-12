@@ -2,37 +2,18 @@ package day0707.fetchingsecondhandgoods;
 
 import java.sql.*;
 
-/*
-    CREATE TABLE `user` (
-      `id` int(11) NOT NULL AUTO_INCREMENT,
-      `name` varchar(255) DEFAULT NULL,
-      `balance` int(11) DEFAULT NULL,
-      PRIMARY KEY (`id`)
-    );
- */
 public class JDBCDemo {
-    public static void main(String[] args) throws SQLException {
-        JDBCDemo jdbcTest = new JDBCDemo();
-        Connection connection = jdbcTest.getConnection();
-        jdbcTest.testStatement(connection);
-//      jdbcTest.testPreparedStatement(connection);
-//      jdbcTest.testTransactions(connection);
-//      jdbcTest.add(connection);
-//      jdbcTest.batchAdd(connection);
- //       jdbcTest.update(connection);
-//      jdbcTest.delete(connection);
-    }
 
     public Connection getConnection() throws SQLException {
         Connection conn = null;
-        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/item?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false", "root", System.getenv("password"));
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/item?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false", "root", System.getenv("sqlPassword"));
         System.out.println("Connected to database");
         return conn;
     }
 
     public void testStatement(Connection connection) {
         Statement stmt = null;
-        String query = "select id, uid, title, publish_date, update_time from seconditem";
+        String query = "select id, uid, title, publish_date from seconditem";
         try {
             stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -40,10 +21,8 @@ public class JDBCDemo {
                 int id = rs.getInt("id");
                 String uid = rs.getString("uid");
                 String title = rs.getString("title");
-                Date publish_date =  rs.getDate("publish_date");
-                Date update_date =  rs.getDate("update_time");
-                Time update_time = rs.getTime("update_time");
-                System.out.println(id + "\t" + uid + "\t" + title + "\t" + publish_date + "\t" + update_date + " " + update_time);
+                Date publishDate =  rs.getDate("publish_date");
+                System.out.println(id + "\t" + uid + "\t" + title + "\t" + publishDate);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -58,20 +37,48 @@ public class JDBCDemo {
         }
     }
 
-    public void testPreparedStatement(Connection connection) {
+    public Task getInstance(Connection connection) {
         PreparedStatement ppstmt = null;
-        String query = "select id, name, balance from user where id = ?";
+        String query = "select id, URL, last_date, last_post from task where URL = ?";
 
         try {
             ppstmt = connection.prepareStatement(query);
-            ppstmt.setInt(1, 1);
+            ppstmt.setString(1, "http://bbs.xmfish.com/thread-htm-fid-55-search-all-orderway-postdate-asc-DESC-page-1.html");
             ResultSet rs = ppstmt.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String name = rs.getString("name");
-                int balance = rs.getInt("balance");
-                System.out.println(id + "\t" + name);
+                String URL = rs.getString("URL");
+                Date last_date = rs.getDate("last_date");
+                String last_post = rs.getString("last_post");
+                return new Task(id, URL, last_date, last_post);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (ppstmt != null) {
+                try {
+                    ppstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
+    public void add(Connection connection, Post post) {
+        PreparedStatement ppstmt = null;
+
+        String insertSql = "insert into secondItem(id, uid, title, publish_date) values(?, ?, ?, ?);";
+
+        try {
+            ppstmt = connection.prepareStatement(insertSql);
+            ppstmt.setInt (1, post.getId());
+            ppstmt.setString(2, post.getUid());
+            ppstmt.setString(3, post.getTitle());
+            ppstmt.setDate(4, post.getPublishDate());
+
+            ppstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -85,15 +92,19 @@ public class JDBCDemo {
         }
     }
 
-    public void add(Connection connection) {
+
+    public void add(Connection connection, Task task) {
         PreparedStatement ppstmt = null;
 
-        String insertSql = "insert into user(name, balance) values(?, ?);";
+        String insertSql = "insert into secondItem(id, URL, last_date, last_post) values(?, ?, ?, ?);";
 
         try {
             ppstmt = connection.prepareStatement(insertSql);
-            ppstmt.setString(1, "alex");
-            ppstmt.setInt(2, 50);
+            ppstmt.setInt (1, task.getId());
+            ppstmt.setString(2, task.getURL());
+            ppstmt.setDate(3, task.getLastTime());
+            ppstmt.setString(4, task.getLastPost());
+
             ppstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -138,14 +149,15 @@ public class JDBCDemo {
         }
     }
 
-    public void update(Connection connection) {
+    public void update(Connection connection, Task task) {
         PreparedStatement ppstmt = null;
-
-        String updateSql = "update user set balance = balance + 5 where name = ?";
+        String updateSql = "update task set last_date = ?, last_post = ? where URL = ?";
 
         try {
             ppstmt = connection.prepareStatement(updateSql);
-            ppstmt.setString(1, "alex");
+            ppstmt.setDate(1, task.getLastTime());
+            ppstmt.setString(2, task.getLastPost());
+            ppstmt.setString(3, task.getURL());
             ppstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
