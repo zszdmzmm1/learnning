@@ -6,7 +6,7 @@ public class JDBCitem implements JDBC{
     @Override
     public Connection getConnection() throws SQLException {
         Connection conn = null;
-        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/item?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false", "root", System.getenv("sqlPassword"));
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/item?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false", "root", "0521");
         System.out.println("Connected to database");
         return conn;
     }
@@ -44,7 +44,7 @@ public class JDBCitem implements JDBC{
     public void add(Connection connection, Post post) {
         PreparedStatement ppstmt = null;
 
-        String insertSql = "insert into secondItem(id, uid, title, publish_date) values(?, ?, ?, ?);";
+        String insertSql = "insert into secondItem(id, uid, title, publish_date, content) values(?, ?, ?, ?, ?);";
 
         try {
             ppstmt = connection.prepareStatement(insertSql);
@@ -52,6 +52,33 @@ public class JDBCitem implements JDBC{
             ppstmt.setString(2, post.getUid());
             ppstmt.setString(3, post.getTitle());
             ppstmt.setDate(4, post.getPublishDate());
+            ppstmt.setString(5, post.getContent());
+
+            ppstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (ppstmt != null) {
+                try {
+                    ppstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    public void add(Connection connection, PostReply rp) {
+        PreparedStatement ppstmt = null;
+
+        String insertSql = "insert into postReply(id, postid, reply) values(?, ?, ?);";
+
+        try {
+            ppstmt = connection.prepareStatement(insertSql);
+            ppstmt.setInt (1, rp.getId());
+            ppstmt.setString(2, rp.getPostId());
+            ppstmt.setString(3, rp.getReply());
 
             ppstmt.executeUpdate();
         } catch (SQLException e) {

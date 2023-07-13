@@ -19,6 +19,7 @@ public class Fetching {
         int sentItem = 0, itemC = 0;
         List<Elements> itemList = new ArrayList();
         Post post = null;
+        PostReply postReply = null;
         JDBCitem jdbcTest = new JDBCitem();
         Connection connection = jdbcTest.getConnection();
         Task task = jdbcTest.getInstance(connection);
@@ -31,13 +32,14 @@ public class Fetching {
             url = url.replaceFirst("page-\\d*", "page-" + i);
             Document doc = Jsoup.connect(url).get();
             Elements elements = doc.select("tr.tr3:has(a[title=开放主题]), tr.tr3:has(a[title=热门主题])");
-
             //进一步提取有用信息
             for (Element e : elements) {
                 Elements item = e.select("a[class=subject_t f14]");
                 Elements date = e.select("p:not(:has(a))");
                 String uid = item.attr("id");
                 Date sqlDate = Date.valueOf(date.html());
+                String content;
+                String postURL = item.attr("abs:href").replace(".html", "");
                 if (isFirst) {
                     task = new Task(url, sqlDate, uid);
                     jdbcTest.update(connection, task);
@@ -50,7 +52,28 @@ public class Fetching {
                         System.out.println("已为您找出" + sentItem + "个匹配物品。");
                         break A;
                     }
-                    post = new Post(uid, item.html(), sqlDate);
+                    for(int j = 1; ; j++){
+                        String rPostURL = postURL + "-page-" + j + ".html";
+                        Document postDoc = Jsoup.connect(rPostURL).get();
+                        Elements reply = postDoc.select("div[id~=read_\\d+]");
+                        Element page = postDoc.selectFirst("div.pages > span.fl");
+                        content = postDoc.select("div[id=read_tpc]").text();
+                        int pages = 1;
+                        if(j == 1 && page != null){
+                            pages = Integer.parseInt(page.html().replace("共", "").replace("页", ""));
+                        }
+                        for(Element r: reply){
+                            String text = r.html();
+                            postReply = new PostReply(uid,  text);
+                            if(!text.trim().equals("")){
+                                jdbcTest.add(connection, postReply);
+                            }
+                        }
+                        if(j == pages){
+                            break;
+                        }
+                    }
+                    post = new Post(uid, item.html(), sqlDate, content);
                     jdbcTest.add(connection, post);
                     System.out.println(item.html());
                     if (item.html().contains("转让")) {
@@ -66,9 +89,9 @@ public class Fetching {
             }
         }
         //发送消息
-        if (itemList.size() != 0) {
+/*        if (itemList.size() != 0) {
             ElementsDealing elementsDealing = new ElementsDealing(System.getenv("qqEmail"), System.getenv("password"), System.getenv("toEmail"));
             elementsDealing.sentMessage(itemList);
-        }
+        }*/
     }
 }

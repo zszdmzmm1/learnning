@@ -14,10 +14,12 @@ public class Post {
     private String uid;
     private String title;
     private Date publishDate;
+    private String content;
 
-    public Post(String uid, String title, Date publishDate) {
+    public Post(String uid, String title, Date publishDate, String content) {
         this.uid = uid;
         this.title = title;
         this.publishDate = publishDate;
+        this.content = content;
     }
 }
