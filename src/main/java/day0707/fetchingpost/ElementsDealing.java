@@ -23,11 +23,11 @@ public class ElementsDealing {
 
 
     public String getElementsString(List<Elements> itemlist){
-        String msg = "";
+        StringBuilder msg = new StringBuilder();
         for (Elements s : itemlist) {
-            msg = msg + "<br>" + s.html() + "</br>" + "<br>" + s.attr("abs:href") + "</br>";
+            msg.append("<br>").append(s.html()).append("</br>").append("<br>").append(s.attr("abs:href")).append("</br>");
         }
-        return msg;
+        return msg.toString();
     }
 
     public void sentMessage(List<Elements> itemlist) throws Exception {
