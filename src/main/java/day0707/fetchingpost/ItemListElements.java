@@ -16,7 +16,7 @@ import java.util.Properties;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ElementsDealing {
+public class ItemListElements {
     private String qqEmail;
     private String password; //授权码
     private String toEmail;

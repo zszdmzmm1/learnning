@@ -19,7 +19,7 @@ public class Fetching {
         int sentItem = 0, itemC = 0;
         List<Elements> itemList = new ArrayList();
         Post post;
-        PostReply postReply;
+        PostElement postElement = new PostElement();
         JDBCitem jdbcTest = new JDBCitem();
         Connection connection = jdbcTest.getConnection();
         Task task = jdbcTest.getInstance(connection);
@@ -39,7 +39,7 @@ public class Fetching {
                 String uid = item.attr("id");
                 Date sqlDate = Date.valueOf(date.html());
                 String content;
-                String postURL = item.attr("abs:href").replace(".html", "");
+                String postURL = item.attr("abs:href");//.replace(".html", "");
                 if (isFirst) {
                     task = new Task(url, sqlDate, uid);
                     task.update(connection);
@@ -52,27 +52,7 @@ public class Fetching {
                         System.out.println("已为您找出" + sentItem + "个匹配物品。");
                         break A;
                     }
-                    for(int j = 1; ; j++){
-                        String rPostURL = postURL + "-page-" + j + ".html";
-                        Document postDoc = Jsoup.connect(rPostURL).get();
-                        Elements reply = postDoc.select("div[id~=read_\\d+]");
-                        Element page = postDoc.selectFirst("div.pages > span.fl");
-                        content = postDoc.select("div[id=read_tpc]").text();
-                        int pages = 1;
-                        if(j == 1 && page != null){
-                            pages = Integer.parseInt(page.html().replaceAll("共(\\d+)页", "$1"));
-                        }
-                        for(Element r: reply){
-                            String text = r.html();
-                            postReply = new PostReply(uid,  text);
-                            if(!text.trim().equals("")){
-                                postReply.add(connection);
-                            }
-                        }
-                        if(j == pages){
-                            break;
-                        }
-                    }
+                    content = postElement.postDealer(connection, postURL, uid);
                     post = new Post(uid, item.html(), sqlDate, content);
                     post.add(connection);
                     System.out.println(item.html());
@@ -90,8 +70,8 @@ public class Fetching {
         }
         //发送消息
 /*        if (itemList.size() != 0) {
-            ElementsDealing elementsDealing = new ElementsDealing(System.getenv("qqEmail"), System.getenv("password"), System.getenv("toEmail"));
-            elementsDealing.sentMessage(itemList);
+            ItemListElements itemListElements = new ItemListElements(System.getenv("qqEmail"), System.getenv("password"), System.getenv("toEmail"));
+            itemListElements.sentMessage(itemList);
         }*/
     }
 }
