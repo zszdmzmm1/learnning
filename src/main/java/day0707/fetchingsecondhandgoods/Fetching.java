@@ -17,16 +17,14 @@ import java.util.List;
 public class Fetching {
     public static void main(String[] args) throws Exception {
         int sentItem = 0, itemC = 0;
-
         List<Elements> itemList = new ArrayList();
         Post post = null;
-        JDBCDemo jdbcTest = new JDBCDemo();
+        JDBCitem jdbcTest = new JDBCitem();
         Connection connection = jdbcTest.getConnection();
         Task task = jdbcTest.getInstance(connection);
         Date lastDate = task.getLastTime();
-        String lastPost = task.getLastPost();
+        String lastPost = task.getLastUid();
         String url = task.getURL();
-        //jdbcTest.testStatement(connection);
         boolean isFirst = true;
         A:
         for (int i = 1; i < 100; i++) {
@@ -68,9 +66,9 @@ public class Fetching {
             }
         }
         //发送消息
-/*        if (itemList.size() != 0) {
+        if (itemList.size() != 0) {
             ElementsDealing elementsDealing = new ElementsDealing(System.getenv("qqEmail"), System.getenv("password"), System.getenv("toEmail"));
             elementsDealing.sentMessage(itemList);
-        }*/
+        }
     }
 }

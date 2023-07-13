@@ -14,16 +14,12 @@ public class Task {
     private int id;
     private String URL;
     private Date lastTime;
-    private String lastPost;
+    private String lastUid;
 
     public Task(String url, Date lastTime, String lastPost) {
         this.URL = url;
         this.lastTime = lastTime;
-        this.lastPost = lastPost;
+        this.lastUid = lastPost;
     }
 
-    public Task(String URL, Date lastTime) {
-        this.URL = URL;
-        this.lastTime = lastTime;
-    }
 }
