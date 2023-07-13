@@ -1,4 +1,4 @@
-package day0707.fetchingsecondhandgoods;
+package day0707.fetchingpost;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,8 +18,8 @@ public class Fetching {
     public static void main(String[] args) throws Exception {
         int sentItem = 0, itemC = 0;
         List<Elements> itemList = new ArrayList();
-        Post post = null;
-        PostReply postReply = null;
+        Post post;
+        PostReply postReply;
         JDBCitem jdbcTest = new JDBCitem();
         Connection connection = jdbcTest.getConnection();
         Task task = jdbcTest.getInstance(connection);
@@ -42,7 +42,7 @@ public class Fetching {
                 String postURL = item.attr("abs:href").replace(".html", "");
                 if (isFirst) {
                     task = new Task(url, sqlDate, uid);
-                    jdbcTest.update(connection, task);
+                    task.update(connection);
                     isFirst = false;
                 }
                 //记录需要的物品
@@ -60,13 +60,13 @@ public class Fetching {
                         content = postDoc.select("div[id=read_tpc]").text();
                         int pages = 1;
                         if(j == 1 && page != null){
-                            pages = Integer.parseInt(page.html().replace("共", "").replace("页", ""));
+                            pages = Integer.parseInt(page.html().replaceAll("共(\\d+)页", "$1"));
                         }
                         for(Element r: reply){
                             String text = r.html();
                             postReply = new PostReply(uid,  text);
                             if(!text.trim().equals("")){
-                                jdbcTest.add(connection, postReply);
+                                postReply.add(connection);
                             }
                         }
                         if(j == pages){
@@ -74,7 +74,7 @@ public class Fetching {
                         }
                     }
                     post = new Post(uid, item.html(), sqlDate, content);
-                    jdbcTest.add(connection, post);
+                    post.add(connection);
                     System.out.println(item.html());
                     if (item.html().contains("转让")) {
                         itemList.add(item);

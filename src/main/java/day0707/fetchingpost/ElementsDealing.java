@@ -1,4 +1,4 @@
-package day0707.fetchingsecondhandgoods;
+package day0707.fetchingpost;
 
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
