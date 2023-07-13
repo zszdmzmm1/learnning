@@ -25,7 +25,7 @@ public class ElementsDealing {
     public String getElementsString(List<Elements> itemlist){
         StringBuilder msg = new StringBuilder();
         for (Elements s : itemlist) {
-            msg.append("<br>").append(s.html()).append("</br>").append("<br>").append(s.attr("abs:href")).append("</br>");
+            msg.append(s.html()).append("<br>").append(s.attr("abs:href")).append("<br>");
         }
         return msg.toString();
     }
