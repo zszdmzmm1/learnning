@@ -2,7 +2,7 @@ package day0707.fetchingpost;
 
 import java.sql.*;
 
-public class JDBCitem implements JDBC{
+public class JDBCItem implements JDBC{
     @Override
     public Connection getConnection() throws SQLException {
         Connection conn = null;

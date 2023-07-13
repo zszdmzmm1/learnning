@@ -16,20 +16,26 @@ import java.util.List;
  */
 public class Fetching {
     public static void main(String[] args) throws Exception {
+        //计数，仅用于记录，可删
         int sentItem = 0, itemC = 0;
+        //记录本次运行需要用于发送信息的Elements
         List<Elements> itemList = new ArrayList();
+        //初始化
         Post post;
         PostElement postElement = new PostElement();
-        JDBCitem jdbcTest = new JDBCitem();
-        Connection connection = jdbcTest.getConnection();
-        Task task = jdbcTest.getInstance(connection);
+        //获取任务
+        JDBCItem jdbcItem = new JDBCItem();
+        Connection connection = jdbcItem.getConnection();
+        Task task = jdbcItem.getInstance(connection);
         Date lastDate = task.getLastTime();
         String lastPost = task.getLastUid();
         String url = task.getURL();
+
         boolean isFirst = true;
         A:
         for (int i = 1; i < 100; i++) {
             url = url.replaceFirst("page-\\d*", "page-" + i);
+
             Document doc = Jsoup.connect(url).get();
             Elements elements = doc.select("tr.tr3:has(a[title=开放主题]), tr.tr3:has(a[title=热门主题])");
             //进一步提取有用信息
@@ -39,7 +45,7 @@ public class Fetching {
                 String uid = item.attr("id");
                 Date sqlDate = Date.valueOf(date.html());
                 String content;
-                String postURL = item.attr("abs:href");//.replace(".html", "");
+                String postURL = item.attr("abs:href");
                 if (isFirst) {
                     task = new Task(url, sqlDate, uid);
                     task.update(connection);

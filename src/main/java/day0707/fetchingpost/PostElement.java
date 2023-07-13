@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.sql.Connection;
 
 
-
 public class PostElement {
     public String postDealer(Connection connection, String url, String uid) throws IOException {
         String rURL, content;
@@ -36,6 +35,5 @@ public class PostElement {
             }
         }
         return content;
-
     }
 }
