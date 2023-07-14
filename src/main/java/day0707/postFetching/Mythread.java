@@ -17,12 +17,14 @@ import java.util.List;
 public class Mythread extends Thread{
     private final int TASK_NUM;
     private final Connection CONNECTION;
+    private final String TARGET;
     private List<Elements> postList = new ArrayList();
 
 
-    public Mythread(int num, Connection connection){
+    public Mythread(int num, String target, Connection connection){
         this.TASK_NUM = num;
         this.CONNECTION = connection;
+        this.TARGET = target;
     }
 
 
@@ -75,7 +77,7 @@ public class Mythread extends Thread{
                     post = new Post(uid, item.html(), sqlDate, content);
                     post.add(CONNECTION);
                     System.out.println(item.html());
-                    if (item.html().contains("转让")) {
+                    if (item.html().contains(TARGET)) {
                         postList.add(item);
                     }
                     itemC++;
