@@ -30,7 +30,7 @@ public class Task implements Table {
 
         try {
             ppstmt = connection.prepareStatement(insertSql);
-            ppstmt.setInt (1, id);
+            ppstmt.setInt(1, id);
             ppstmt.setString(2, URL);
             ppstmt.setDate(3, lastTime);
             ppstmt.setString(4, lastUid);
@@ -99,5 +99,21 @@ public class Task implements Table {
             }
         }
         return null;
+    }
+
+    public static int getNum(Connection connection) {
+        int num = 0;
+        PreparedStatement ppstmt = null;
+        String query = "select id from task;";
+        try {
+            ppstmt = connection.prepareStatement(query);
+            ResultSet rs = ppstmt.executeQuery();
+            while (rs.next()) {
+                num++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return num;
     }
 }

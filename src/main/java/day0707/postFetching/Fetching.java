@@ -12,12 +12,13 @@ import java.util.List;
  * 在厦门小鱼网爬取二手信息，挑选需要的发送至邮箱
  */
 public class Fetching {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws InterruptedException {
         JDBCItem jdbcItem = new JDBCItem();
         Connection connection = jdbcItem.getConnection();
         List<Elements> post = new ArrayList<>();
 
-        for(int i = 1; i <= 3; i++){
+        int missionNum = Task.getNum(connection);
+        for(int i = 1; i <= missionNum; i++){
             Mythread mythread = new Mythread(i, connection);
             mythread.start();
             mythread.join();
