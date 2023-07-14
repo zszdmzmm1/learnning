@@ -1,4 +1,4 @@
-package day0707.fetchingpost;
+package day0707.postFetching;
 
 import java.sql.Connection;
 import java.sql.SQLException;

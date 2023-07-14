@@ -1,4 +1,4 @@
-package day0707.fetchingpost;
+package day0707.postFetching;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 @Getter
 @Setter
 
-public class PostReply implements table {
+public class PostReply implements Table {
     private int id;
     private String postId;
     private String reply;

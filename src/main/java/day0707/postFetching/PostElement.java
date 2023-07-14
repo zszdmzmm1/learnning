@@ -1,21 +1,23 @@
-package day0707.fetchingpost;
-
+package day0707.postFetching;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import java.io.IOException;
 import java.sql.Connection;
 
 
 public class PostElement {
-    public String postDealer(Connection connection, String url, String uid) throws IOException {
-        String rURL, content;
-
+    public String postDealer(Connection connection, String url, String uid)  {
+        String content;
         for (int j = 1; ; j++) {
-            rURL = url.replace(".html", "") + "-page-" + j + ".html";
-            Document postDoc = Jsoup.connect(rURL).get();
+            String rURL = url.replace(".html", "") + "-page-" + j + ".html";
+            Document postDoc = null;
+            try {
+                postDoc = Jsoup.connect(rURL).get();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             Elements reply = postDoc.select("div[id~=read_\\d+]");
             Element page = postDoc.selectFirst("div.pages > span.fl");
             content = postDoc.select("div[id=read_tpc]").text();

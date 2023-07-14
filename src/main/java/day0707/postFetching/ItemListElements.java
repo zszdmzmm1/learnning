@@ -1,4 +1,4 @@
-package day0707.fetchingpost;
+package day0707.postFetching;
 
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
@@ -30,9 +30,13 @@ public class ItemListElements {
         return msg.toString();
     }
 
-    public void sentMessage(List<Elements> itemlist) throws Exception {
+    public void sentMessage(List<Elements> itemlist) {
         String msg = getElementsString(itemlist);
-        getEmail("已发现：", msg);
+        try {
+            getEmail("已发现：", msg);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void getEmail(String title, String msg) throws Exception {

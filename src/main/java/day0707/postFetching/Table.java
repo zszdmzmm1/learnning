@@ -1,7 +1,7 @@
-package day0707.fetchingpost;
+package day0707.postFetching;
 
 import java.sql.Connection;
 
-public interface table {
+public interface Table {
     void add(Connection connection);
 }

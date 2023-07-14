@@ -1,4 +1,4 @@
-package day0707.fetchingpost;
+package day0707.postFetching;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 @Getter
 @Setter
-public class Post implements table{
+public class Post implements Table {
     private int id;
     private String uid;
     private String title;
@@ -30,7 +30,7 @@ public class Post implements table{
     public void add(Connection connection) {
         PreparedStatement ppstmt = null;
 
-        String insertSql = "insert into secondItem(id, uid, title, publish_date, content) values(?, ?, ?, ?, ?);";
+        String insertSql = "insert into post(id, uid, title, publish_date, content) values(?, ?, ?, ?, ?);";
 
         try {
             ppstmt = connection.prepareStatement(insertSql);

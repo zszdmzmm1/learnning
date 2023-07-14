@@ -1,32 +1,42 @@
-package day0707.fetchingpost;
+package day0707.postFetching;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+@Getter
+@Setter
+public class Mythread extends Thread{
+    private final int TASK_NUM;
+    private final Connection CONNECTION;
+    private List<Elements> postList = new ArrayList();
 
 
-/**
- * 在厦门小鱼网爬取二手信息，挑选需要的发送至邮箱
- */
-public class Fetching {
-    public static void main(String[] args) throws Exception {
+    public Mythread(int num, Connection connection){
+        this.TASK_NUM = num;
+        this.CONNECTION = connection;
+    }
+
+
+    @Override
+    public void run() {
         //计数，仅用于记录，可删
         int sentItem = 0, itemC = 0;
         //记录本次运行需要用于发送信息的Elements
-        List<Elements> itemList = new ArrayList();
+
         //初始化
         Post post;
         PostElement postElement = new PostElement();
         //获取任务
-        JDBCItem jdbcItem = new JDBCItem();
-        Connection connection = jdbcItem.getConnection();
-        Task task = jdbcItem.getInstance(connection);
+        Task task = Task.getInstance(CONNECTION, TASK_NUM);
         Date lastDate = task.getLastTime();
         String lastPost = task.getLastUid();
         String url = task.getURL();
@@ -36,7 +46,12 @@ public class Fetching {
         for (int i = 1; i < 100; i++) {
             url = url.replaceFirst("page-\\d*", "page-" + i);
 
-            Document doc = Jsoup.connect(url).get();
+            Document doc = null;
+            try {
+                doc = Jsoup.connect(url).get();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             Elements elements = doc.select("tr.tr3:has(a[title=开放主题]), tr.tr3:has(a[title=热门主题])");
             //进一步提取有用信息
             for (Element e : elements) {
@@ -48,7 +63,7 @@ public class Fetching {
                 String postURL = item.attr("abs:href");
                 if (isFirst) {
                     task = new Task(url, sqlDate, uid);
-                    task.update(connection);
+                    task.update(CONNECTION);
                     isFirst = false;
                 }
                 //记录需要的物品
@@ -58,26 +73,22 @@ public class Fetching {
                         System.out.println("已为您找出" + sentItem + "个匹配物品。");
                         break A;
                     }
-                    content = postElement.postDealer(connection, postURL, uid);
+                    content = postElement.postDealer(CONNECTION, postURL, uid);
                     post = new Post(uid, item.html(), sqlDate, content);
-                    post.add(connection);
+                    post.add(CONNECTION);
                     System.out.println(item.html());
                     if (item.html().contains("转让")) {
-                        itemList.add(item);
+                        postList.add(item);
                         sentItem++;
                     }
                     itemC++;
                 } else {
-                    System.out.println("共发现" + itemC + "个新物品。");
-                    System.out.println("已为您找出" + sentItem + "个匹配物品。");
+                    System.out.println("共发现" + itemC + "个新帖子。");
+                    System.out.println("已为您找出" + sentItem + "个匹配帖子。");
                     break A;
                 }
             }
         }
-        //发送消息
-/*        if (itemList.size() != 0) {
-            ItemListElements itemListElements = new ItemListElements(System.getenv("qqEmail"), System.getenv("password"), System.getenv("toEmail"));
-            itemListElements.sentMessage(itemList);
-        }*/
+
     }
 }
