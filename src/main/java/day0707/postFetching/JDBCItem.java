@@ -1,5 +1,7 @@
 package day0707.postFetching;
 
+import tool.AppConfig;
+
 import java.sql.*;
 
 public class JDBCItem implements JDBC{
@@ -7,7 +9,7 @@ public class JDBCItem implements JDBC{
     public Connection getConnection(){
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/item?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false", "root", "0521");
+            conn = DriverManager.getConnection(AppConfig.get("sqlURL"), "root", AppConfig.get("sqlPassword"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

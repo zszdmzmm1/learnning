@@ -28,10 +28,10 @@ public class Fetching {
             mythread.join();
             post.addAll(mythread.getPostList());
         }
-        if (post.size() != 0) {
+/*        if (post.size() != 0) {
             System.out.println("找到" + post.size() + "个匹配帖子");
             ItemListElements itemListElements = new ItemListElements(System.getenv("qqEmail"), System.getenv("password"), System.getenv("toEmail"));
             itemListElements.sentMessage(post);
-        }
+        }*/
     }
 }
