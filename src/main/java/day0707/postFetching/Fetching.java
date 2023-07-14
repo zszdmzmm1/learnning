@@ -20,12 +20,14 @@ public class Fetching {
         for(int i = 1; i <= 3; i++){
             Mythread mythread = new Mythread(i, connection);
             mythread.start();
-            //post.addAll(mythread.getPostList());
+            mythread.join();
+            post.addAll(mythread.getPostList());
         }
-/*        if (post.size() != 0) {
+        if (post.size() != 0) {
+            System.out.println("找到" + post.size() + "个匹配帖子");
             ItemListElements itemListElements = new ItemListElements(System.getenv("qqEmail"), System.getenv("password"), System.getenv("toEmail"));
             itemListElements.sentMessage(post);
-        }*/
+        }
         System.out.println("跑完啦");
     }
 }

@@ -29,7 +29,7 @@ public class Mythread extends Thread{
     @Override
     public void run() {
         //计数，仅用于记录，可删
-        int sentItem = 0, itemC = 0;
+        int itemC = 0;
         //记录本次运行需要用于发送信息的Elements
 
         //初始化
@@ -69,8 +69,6 @@ public class Mythread extends Thread{
                 //记录需要的物品
                 if (sqlDate.compareTo(lastDate) >= 0) {
                     if (lastPost != null && (uid.compareTo(lastPost) <= 0)) {
-                        System.out.println("共发现" + itemC + "个新物品。");
-                        System.out.println("已为您找出" + sentItem + "个匹配物品。");
                         break A;
                     }
                     content = postElement.postDealer(CONNECTION, postURL, uid);
@@ -79,12 +77,9 @@ public class Mythread extends Thread{
                     System.out.println(item.html());
                     if (item.html().contains("转让")) {
                         postList.add(item);
-                        sentItem++;
                     }
                     itemC++;
                 } else {
-                    System.out.println("共发现" + itemC + "个新帖子。");
-                    System.out.println("已为您找出" + sentItem + "个匹配帖子。");
                     break A;
                 }
             }
