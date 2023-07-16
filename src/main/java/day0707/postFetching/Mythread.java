@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Getter
 @Setter
-public class Mythread extends Thread{
+public class Mythread implements Runnable{
     private final int TASK_NUM;
     private final Connection CONNECTION;
     private final String TARGET;
@@ -45,7 +45,7 @@ public class Mythread extends Thread{
 
         boolean isFirst = true;
         A:
-        for (int i = 1; i < 100; i++) {
+        for (int i = 1;; i++) {
             url = url.replaceFirst("page-\\d*", "page-" + i);
 
             Document doc = null;
@@ -86,6 +86,5 @@ public class Mythread extends Thread{
                 }
             }
         }
-
     }
 }

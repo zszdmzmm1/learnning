@@ -24,14 +24,14 @@ public class Fetching {
         String target = scanner.next();
         for(int i = 1; i <= missionNum; i++){
             Mythread mythread = new Mythread(i, target, connection);
-            mythread.start();
-            mythread.join();
-            post.addAll(mythread.getPostList());
+            Thread thread = new Thread(mythread);
+            thread.start();
+            thread.join();
         }
-/*        if (post.size() != 0) {
+        if (post.size() != 0) {
             System.out.println("找到" + post.size() + "个匹配帖子");
             ItemListElements itemListElements = new ItemListElements(System.getenv("qqEmail"), System.getenv("password"), System.getenv("toEmail"));
             itemListElements.sentMessage(post);
-        }*/
+        }
     }
 }

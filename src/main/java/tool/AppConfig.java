@@ -22,7 +22,6 @@ public class AppConfig {
             System.exit(-1);
         }
     }
-
     public static String get(String key) {
         return System.getProperty(key, props.getProperty(key, ""));
     }
